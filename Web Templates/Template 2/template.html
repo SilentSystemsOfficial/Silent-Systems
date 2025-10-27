@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EmeraldTech Store</title>
+<style>
+  /* ====== GLOBAL STYLES ====== */
+  * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+  body {
+    background: radial-gradient(circle at top left, #0a0f0d, #010302);
+    color: #fff;
+    overflow-x: hidden;
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  /* ====== NAVBAR ====== */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    backdrop-filter: blur(12px);
+    background: rgba(15, 20, 17, 0.75);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+  }
+  .logo { font-size: 1.5rem; font-weight: 600; color: #00ff88; }
+
+  .search-bar {
+    flex: 1;
+    margin: 0 2rem;
+    max-width: 500px;
+  }
+  .search-bar input {
+    width: 100%;
+    padding: 0.6rem 1rem;
+    border: none;
+    border-radius: 25px;
+    background: rgba(255,255,255,0.08);
+    color: #fff;
+    outline: none;
+  }
+
+  .cart-icon {
+    font-size: 1.6rem;
+    cursor: pointer;
+    position: relative;
+  }
+  .cart-count {
+    position: absolute;
+    top: -8px; right: -10px;
+    background: #00ff88;
+    color: #000;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 0.7rem;
+    font-weight: bold;
+  }
+
+  /* ====== HERO ====== */
+  .hero {
+    position: relative;
+    text-align: center;
+    padding: 4rem 1rem;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.2), #010302);
+  }
+  .hero img {
+    width: 100%;
+    max-height: 500px;
+    object-fit: cover;
+    border-radius: 20px;
+    opacity: 0.8;
+  }
+  .hero-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .hero-content h1 { font-size: 2.5rem; margin-bottom: 1rem; }
+  .hero-content button {
+    background: linear-gradient(90deg, #00ff88, #00aa55);
+    border: none; padding: 0.8rem 2rem; border-radius: 25px;
+    color: #000; font-weight: bold; cursor: pointer; transition: 0.3s;
+  }
+  .hero-content button:hover { transform: scale(1.05); }
+
+  /* ====== PRODUCTS ====== */
+  .products {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    padding: 3rem 2rem;
+  }
+  .product {
+    background: rgba(255,255,255,0.05);
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+    transition: transform 0.3s;
+  }
+  .product:hover { transform: translateY(-5px); }
+  .product img {
+    width: 100%; height: 220px; object-fit: cover;
+  }
+  .product-info {
+    padding: 1rem;
+  }
+  .stars { color: #00ff88; margin-bottom: 0.5rem; }
+  .add-btn {
+    position: absolute; bottom: -50px; left: 0;
+    width: 100%; text-align: center;
+    background: rgba(0, 255, 136, 0.9);
+    color: #000; padding: 0.8rem; border: none;
+    font-weight: 600; cursor: pointer;
+    transition: bottom 0.3s;
+  }
+  .product:hover .add-btn { bottom: 0; }
+
+  /* ====== MINI CART ====== */
+  .cart-panel {
+    position: fixed;
+    top: 0; right: -400px;
+    width: 350px; height: 100vh;
+    background: rgba(15, 20, 17, 0.85);
+    backdrop-filter: blur(10px);
+    box-shadow: -5px 0 20px rgba(0,0,0,0.4);
+    transition: right 0.3s linear;
+    padding: 1.5rem;
+    display: flex; flex-direction: column;
+  }
+  .cart-panel.open { right: 0; }
+  .cart-panel h2 { margin-bottom: 1rem; color: #00ff88; }
+  .cart-items { flex: 1; overflow-y: auto; }
+  .cart-item {
+    display: flex; align-items: center; margin-bottom: 1rem;
+    background: rgba(255,255,255,0.05); border-radius: 10px; padding: 0.5rem;
+  }
+  .cart-item img {
+    width: 50px; height: 50px; object-fit: cover; border-radius: 8px; margin-right: 0.5rem;
+  }
+  .cart-item-info { flex: 1; font-size: 0.9rem; }
+  .cart-item-info span { display: block; }
+  .cart-item-qty { display: flex; align-items: center; }
+  .cart-item-qty button {
+    background: none; border: none; color: #00ff88;
+    font-size: 1rem; cursor: pointer; padding: 0 5px;
+  }
+
+  .cart-total {
+    margin-top: 1rem;
+    font-weight: bold;
+    display: flex; justify-content: space-between;
+  }
+  .cart-panel button.checkout {
+    margin-top: 1rem;
+    background: linear-gradient(90deg, #00ff88, #00aa55);
+    border: none; padding: 0.8rem; border-radius: 20px;
+    color: #000; font-weight: 600; cursor: pointer;
+  }
+
+  /* ====== FOOTER ====== */
+  footer {
+    text-align: center;
+    padding: 2rem;
+    font-size: 0.8rem;
+    color: #ccc;
+  }
+
+  @media (max-width: 768px) {
+    .search-bar { margin: 0 1rem; }
+    .hero-content h1 { font-size: 1.8rem; }
+    .cart-panel { width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">EmeraldTech</div>
+  <div class="search-bar"><input type="text" placeholder="Search products..."></div>
+  <div class="cart-icon" id="cart-icon">🛒<span class="cart-count" id="cart-count">0</span></div>
+</header>
+
+<section class="hero">
+  <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=1500&q=80" alt="Laptop Hero">
+  <div class="hero-content">
+    <h1>Discover the Future of Tech</h1>
+    <button>Shop Now</button>
+  </div>
+</section>
+
+<section class="products" id="products"></section>
+
+<div class="cart-panel" id="cart-panel">
+  <h2>Your Cart</h2>
+  <div class="cart-items" id="cart-items"></div>
+  <div class="cart-total"><span>Total:</span> <span id="cart-total">₹0</span></div>
+  <button class="checkout" onclick="checkout()">Checkout</button>
+</div>
+
+<footer>All names and images are for reference only.</footer>
+
+<script>
+  const products = [
+    {id:1, name:'Wireless Headphones', price:2999, img:'https://images.unsplash.com/photo-1505740106531-4243f3831c78?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA==&auto=format&fit=crop&q=80&w=1170'},
+    {id:2, name:'Smartwatch', price:4999, img:'https://images.unsplash.com/photo-1579586337278-3befd40fd17a?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA==&auto=format&fit=crop&q=80&w=1172'},
+    {id:3, name:'Gaming Mouse', price:1999, img:'https://images.unsplash.com/photo-1631749352438-7d576312185d?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1631'},
+    {id:4, name:'Wireless Keyboard', price:2599, img:'https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=600&q=80'},
+    {id:5, name:'Portable Speaker', price:3499, img:'https://images.unsplash.com/photo-1598034989845-48532781987e?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170'},
+    {id:6, name:'Laptop Stand', price:1499, img:'https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=600&q=80'}
+  ];
+
+  const productContainer = document.getElementById('products');
+  const cartPanel = document.getElementById('cart-panel');
+  const cartIcon = document.getElementById('cart-icon');
+  const cartCount = document.getElementById('cart-count');
+  const cartItemsDiv = document.getElementById('cart-items');
+  const cartTotal = document.getElementById('cart-total');
+
+  let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+  function renderProducts() {
+    productContainer.innerHTML = '';
+    products.forEach(p => {
+      const stars = '★'.repeat(5);
+      productContainer.innerHTML += `
+        <div class="product">
+          <img src="${p.img}" alt="${p.name}">
+          <div class="product-info">
+            <div class="stars">${stars}</div>
+            <h4>${p.name}</h4>
+            <p>₹${p.price}</p>
+          </div>
+          <button class="add-btn" onclick="addToCart(${p.id})">Add to Cart</button>
+        </div>
+      `;
+    });
+  }
+
+  function renderCart() {
+    cartItemsDiv.innerHTML = '';
+    let total = 0;
+    cart.forEach(item => {
+      total += item.price * item.qty;
+      cartItemsDiv.innerHTML += `
+        <div class="cart-item">
+          <img src="${item.img}" alt="${item.name}">
+          <div class="cart-item-info">
+            <span>${item.name}</span>
+            <span>₹${item.price}</span>
+          </div>
+          <div class="cart-item-qty">
+            <button onclick="updateQty(${item.id}, -1)">−</button>
+            <span>${item.qty}</span>
+            <button onclick="updateQty(${item.id}, 1)">+</button>
+          </div>
+        </div>
+      `;
+    });
+    cartTotal.textContent = '₹' + total;
+    cartCount.textContent = cart.reduce((a, b) => a + b.qty, 0);
+    localStorage.setItem('cart', JSON.stringify(cart));
+  }
+
+  function addToCart(id) {
+    const product = products.find(p => p.id === id);
+    const existing = cart.find(i => i.id === id);
+    if (existing) existing.qty++;
+    else cart.push({...product, qty: 1});
+    renderCart();
+  }
+
+  function updateQty(id, delta) {
+    const item = cart.find(i => i.id === id);
+    if (!item) return;
+    item.qty += delta;
+    if (item.qty <= 0) cart = cart.filter(i => i.id !== id);
+    renderCart();
+  }
+
+  function checkout() {
+    alert('Checkout feature coming soon!');
+  }
+
+  cartIcon.onclick = () => {
+    cartPanel.classList.toggle('open');
+  };
+
+  renderProducts();
+  renderCart();
+</script>
+</body>
+</html>

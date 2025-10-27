@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Digital Agency</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: url(https://images.pexels.com/photos/459572/pexels-photo-459572.jpeg) no-repeat center center fixed;
+      background-size: cover;
+      color: #fff;
+    }
+
+    /* NAVBAR */
+    .navbar {
+      background: #111;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 30px;
+      position: relative;
+      z-index: 10;
+    }
+
+    .navbar::before,
+    .navbar::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      width: 36px;
+      height: 64px;
+      background: #353333;
+      z-index: -1;
+    }
+
+    .navbar::before {
+      left: 0;
+      transform: skewY(30deg) translateY(11px);
+    }
+
+    .navbar::after {
+      right: 0;
+      transform: skewY(-30deg) translateY(11px);
+    }
+
+    .navbar nav {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+    }
+
+    .navbar a {
+      font-size: 16px;
+      letter-spacing: 1px;
+      text-decoration: none;
+      color: #fff;
+      padding: 8px 14px;
+      border-radius: 25px;
+      transition: 0.4s;
+    }
+
+    .navbar a:hover {
+      background: #353333;
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: 700;
+      color: #00ffaa;
+      letter-spacing: 1px;
+    }
+
+    /* MOBILE NAV TOGGLE */
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      gap: 5px;
+    }
+
+    .menu-toggle span {
+      width: 25px;
+      height: 3px;
+      background: #fff;
+      transition: 0.3s;
+    }
+
+    /* HERO */
+    .hero {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 90vh;
+      text-align: center;
+      padding: 0 5%;
+    }
+
+    .hero h1 {
+      font-size: 65px;
+      color: #111;
+      background: rgba(255,255,255,0.85);
+      padding: 10px 25px;
+      border-radius: 12px;
+    }
+
+    .hero p {
+      color: #353333;
+      font-size: 18px;
+      margin: 20px auto;
+      width: 75%;
+      background: rgba(255,255,255,0.7);
+      padding: 10px 15px;
+      border-radius: 10px;
+    }
+
+    .hero a {
+      text-decoration: none;
+      background: #111;
+      color: #fff;
+      padding: 10px 30px;
+      border-radius: 25px;
+      transition: 0.4s;
+    }
+
+    .hero a:hover {
+      background: #353333;
+    }
+
+    section {
+      padding: 80px 10%;
+      text-align: center;
+      background: rgba(0,0,0,0.6);
+      margin-top: 40px;
+      border-radius: 20px;
+    }
+
+    section h2 {
+      font-size: 38px;
+      margin-bottom: 20px;
+      color: #00ffaa;
+      letter-spacing: 1px;
+    }
+
+    section p {
+      font-size: 18px;
+      line-height: 1.6;
+      color: #ccc;
+      margin-bottom: 30px;
+    }
+
+    /* SERVICES */
+    .services {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+    }
+
+    .service-box {
+      background: #111;
+      padding: 25px;
+      border-radius: 15px;
+      transition: transform 0.3s ease;
+    }
+
+    .service-box:hover {
+      transform: scale(1.05);
+      background: #222;
+    }
+
+    .service-box h3 {
+      color: #00ffaa;
+      margin-bottom: 10px;
+    }
+
+    /* PORTFOLIO */
+    .portfolio-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .portfolio-gallery img {
+      width: 100%;
+      border-radius: 15px;
+      transition: transform 0.4s;
+    }
+
+    .portfolio-gallery img:hover {
+      transform: scale(1.05);
+    }
+
+    /* CONTACT */
+    .contact form {
+      max-width: 600px;
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .contact input, .contact textarea {
+      padding: 12px;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      outline: none;
+    }
+
+    .contact button {
+      background: #00ffaa;
+      color: #111;
+      border: none;
+      padding: 12px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.4s;
+      font-weight: 600;
+    }
+
+    .contact button:hover {
+      background: #00cc88;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #111;
+      color: #aaa;
+      margin-top: 50px;
+      border-radius: 15px;
+    }
+
+    /* RESPONSIVE STYLES */
+    @media (max-width: 900px) {
+      .navbar nav {
+        position: absolute;
+        top: 65px;
+        left: 0;
+        width: 100%;
+        background: #111;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+        padding: 20px 0;
+        display: none;
+      }
+
+      .navbar nav.active {
+        display: flex;
+      }
+
+      .menu-toggle {
+        display: flex;
+      }
+
+      .hero h1 {
+        font-size: 45px;
+      }
+
+      .hero p {
+        font-size: 16px;
+        width: 90%;
+      }
+
+      section {
+        padding: 60px 6%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="navbar">
+    <div class="logo">DigitalAgency</div>
+    <div class="menu-toggle" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+    <nav id="menu">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#portfolio">Portfolio</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <section class="hero" id="home">
+    <h1>Digital Agency</h1>
+    <p>We create powerful, modern, and responsive websites to elevate your business presence online.</p>
+    <a href="#services">Explore Services</a>
+  </section>
+
+  <section id="about">
+    <h2>About Us</h2>
+    <p>We are a team of creative designers and developers passionate about crafting visually appealing, performance-driven websites. Our focus is to help brands stand out and grow digitally through stunning UI and intelligent design systems.</p>
+  </section>
+
+  <section id="services">
+    <h2>Our Services</h2>
+    <div class="services">
+      <div class="service-box">
+        <h3>Website Design</h3>
+        <p>Elegant, responsive, and brand-focused website design for your business.</p>
+      </div>
+      <div class="service-box">
+        <h3>Web Development</h3>
+        <p>Full-stack web solutions powered by the latest technologies and frameworks.</p>
+      </div>
+      <div class="service-box">
+        <h3>SEO & Marketing</h3>
+        <p>Improve visibility and drive targeted traffic with optimized strategies.</p>
+      </div>
+      <div class="service-box">
+        <h3>Brand Identity</h3>
+        <p>From logos to color palettes, we define the essence of your brand visually.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="portfolio">
+    <h2>Our Work</h2>
+    <div class="portfolio-gallery">
+      <img src="https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg" alt="Project 1">
+      <img src="https://images.pexels.com/photos/1181275/pexels-photo-1181275.jpeg" alt="Project 2">
+      <img src="https://images.pexels.com/photos/265087/pexels-photo-265087.jpeg" alt="Project 3">
+      <img src="https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg" alt="Project 4">
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <h2>Contact Us</h2>
+    <p>Have a project in mind? Let's build something amazing together.</p>
+    <form>
+      <input type="text" placeholder="Your Name" required>
+      <input type="email" placeholder="Your Email" required>
+      <textarea rows="5" placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>© 2025 Digital Agency. All rights reserved.</p>
+  </footer>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById('menu').classList.toggle('active');
+    }
+  </script>
+</body>
+</html>

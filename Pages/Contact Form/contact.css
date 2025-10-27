@@ -1,0 +1,273 @@
+/* ========== Global Reset ========== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+/* ========== Navbar Styles ========== */
+header {
+  position: fixed;
+  width: 100%;
+  background-color: #0b1a2b;
+  padding: 15px 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+}
+
+.logo {
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  gap: 30px;
+}
+
+.nav-links li a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: color 0.3s ease;
+}
+
+.nav-links li a:hover {
+  color: #00bfff;
+}
+
+
+/* ========== Hamburger Menu ========== */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.hamburger div {
+  width: 25px;
+  height: 3px;
+  background: #fff;
+  margin: 4px 0;
+  transition: all 0.3s ease;
+}
+
+
+/* ========== Contact Section ========== */
+.contact-section {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0b0f19 0%, #121827 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 120px 20px 60px;
+}
+
+.contact-container {
+  background: rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(12px);
+  border-radius: 16px;
+  padding: 50px 40px;
+  max-width: 700px;
+  width: 100%;
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  color: #e6e6e6;
+  animation: fadeIn 1.2s ease-in-out;
+}
+
+/* ===== Title & Subtitle ===== */
+.contact-title {
+  font-size: 2rem;
+  color: #00bfff;
+  margin-bottom: 10px;
+}
+
+.contact-subtitle {
+  font-size: 1rem;
+  color: #ccc;
+  line-height: 1.7;
+  margin-bottom: 35px;
+}
+
+/* ===== Form Styling ===== */
+.form-group {
+  margin-bottom: 20px;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 14px 16px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  outline: none;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #aaa;
+}
+
+input:focus,
+textarea:focus {
+  background-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 8px #00bfff;
+}
+
+/* ===== Send Button ===== */
+.send-btn {
+  width: 100%;
+  background-color: #00bfff;
+  color: #fff;
+  padding: 14px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 10px;
+}
+
+.send-btn:hover {
+  background-color: #0099cc;
+  transform: scale(1.03);
+}
+
+/* ===== Response Message ===== */
+.response-message {
+  margin-top: 18px;
+  font-size: 1rem;
+  font-weight: 500;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.response-message.success {
+  color: #00ff9d;
+  opacity: 1;
+}
+
+.response-message.error {
+  color: #ff5252;
+  opacity: 1;
+}
+
+/* ===== Divider ===== */
+.divider {
+  width: 100%;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.1);
+  margin: 40px 0 30px;
+}
+
+/* ===== Contact Details ===== */
+.contact-details h3 {
+  color: #00bfff;
+  margin-bottom: 20px;
+}
+
+.details-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+  margin-bottom: 25px;
+}
+
+.details-grid p {
+  color: #ddd;
+  font-size: 0.95rem;
+}
+
+/* ===== Social Links ===== */
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+}
+
+.social-links a {
+  color: #fff;
+  font-size: 1.4rem;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.social-icon {
+    width: 30px;
+    height: 30px;
+}
+
+.social-links a:hover {
+  color: #00bfff;
+  transform: scale(1.2);
+}
+
+/* ===== Scroll-in Animation ===== */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== Responsive Adjustments ===== */
+@media (max-width: 600px) {
+  .contact-container {
+    padding: 35px 25px;
+  }
+
+  .contact-title {
+    font-size: 1.7rem;
+  }
+
+  .contact-subtitle {
+    font-size: 0.95rem;
+  }
+
+  .send-btn {
+    font-size: 0.95rem;
+  }
+
+  .social-links a {
+    font-size: 1.3rem;
+  }
+  header {
+    padding: 15px 25px;
+  }
+
+  .nav-links {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 70%;
+    height: 100vh;
+    background-color: #0b1a2b; /* solid background */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: right 0.4s ease;
+    gap: 25px;
+  }
+
+  .nav-links.active {
+    right: 0;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+}

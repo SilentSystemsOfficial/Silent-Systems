@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact | Silent Systems</title>
+  <link rel="stylesheet" href="contact.css" />
+</head>
+<body>
+  <header>
+    <div class="logo">Silent Systems</div>
+    <ul class="nav-links">
+      <li><a href="../../index.html">Home</a></li>
+      <li><a href="../../Main.html#services">Services</a></li>
+      <li><a href="../../Main.html#portfolio">Portfolio</a></li>
+      <li><a href="../../Main.html#about">About</a></li>
+    </ul>
+    <div class="hamburger">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </header>
+
+  <section class="contact-section">
+    <div class="contact-container">
+      <h2 class="contact-title">Let’s Connect</h2>
+      <p class="contact-subtitle">
+        Whether you’re looking to build a new website or enhance your digital presence,  
+        we’d love to hear from you. Drop us a message or reach out directly below.
+      </p>
+
+      <form id="contactForm">
+        <div class="form-group">
+          <input type="text" name="name" placeholder="Your Name" required />
+        </div>
+        <div class="form-group">
+          <input type="email" name="email" placeholder="Your Email" required />
+        </div>
+        <div class="form-group">
+          <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+        </div>
+        <button type="submit" class="send-btn">Send Message</button>
+      </form>
+
+      <p id="responseMsg" class="response-message"></p>
+
+      <div class="divider"></div>
+
+      <div class="contact-details">
+        <h3>Other Ways to Reach Us</h3>
+        <div class="details-grid">
+          <p><strong>Email:</strong><a href="mailto:silentsystems.team@gmail.com">silentsystems.team@gmail.com</a></p>
+          <p><strong>Phone:</strong> <a href="tel:+917849866475">+91 78498 66475</a></p>
+          <p><strong>Location:</strong> Jaipur, Rajasthan, India</p>
+        </div>
+
+        <div class="social-links">
+          <a href="https://instagram.com/silentsystems" target="_blank" aria-label="Instagram">
+            <img src="../../Images/Logos/instagram.svg" alt="Instagram Logo" class="social-icon">
+          </a>
+          <a href="https://linkedin.com/company/silentsystems" target="_blank" aria-label="LinkedIn">
+            <img src="../../Images/Logos/facebook.svg" alt="Facebook Logo" class="social-icon">
+          </a>
+          <a href="https://twitter.com/silentsystems" target="_blank" aria-label="Twitter">
+            <img src="../../Images/Logos/twitter-x.svg" alt="Twitter-X Logo" class="social-icon">
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<!-- Font Awesome for icons -->
+<script src="https://kit.fontawesome.com/a2b99c50b6.js" crossorigin="anonymous"></script>
+
+  <script>
+  document.getElementById("contactForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const responseEl = document.getElementById("responseMsg");
+    responseEl.className = "response-message"; // reset
+
+    const formData = {
+      name: e.target.name.value.trim(),
+      email: e.target.email.value.trim(),
+      message: e.target.message.value.trim()
+    };
+
+    try {
+      const res = await fetch("/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData)
+      });
+
+      const data = await res.json();
+
+      if (data.success) {
+        responseEl.textContent = data.message || "Message sent successfully!";
+        responseEl.classList.add("success");
+        e.target.reset();
+      } else {
+        responseEl.textContent = data.error || "Please fill in all fields.";
+        responseEl.classList.add("error");
+      }
+    } catch (error) {
+      responseEl.textContent = "Server error. Please try again later.";
+      responseEl.classList.add("error");
+    }
+  });
+  </script>
+  <script src="contact.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Silent Systems | Custom Websites</title>
+    <link rel="icon" href="Images/Logos/Logo.png" type="image/png">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <!-- Header / Navigation -->
+    <header>
+        <div class="logo">Silent Systems</div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="Pages/Contact Form/contact.html" class="nav-contact">Contact Us</a></li> <!-- Add class -->
+            </ul>
+            <div class="hamburger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>We Build Fully Customized Websites That Sell Your Brand</h1>
+            <p>High-quality, responsive websites for businesses, startups, and entrepreneurs.</p>
+            <a href="Pages/Contact Form/contact.html" class="hero-btn">Work With Us</a>
+        </div>
+        <div class="hero-image">
+            <img src="Images/Hero.png" alt="Custom Website Design">
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <h2>Our Services</h2>
+        <div class="service-cards">
+            <div class="card">
+                <h3>Custom Websites</h3>
+                <p>Tailored websites designed to reflect your brand and engage your audience.</p>
+            </div>
+            <div class="card">
+                <h3>E-Commerce Solutions</h3>
+                <p>Full-featured online stores with payment integration and easy management.</p>
+            </div>
+            <div class="card">
+                <h3>Admin Dashboards</h3>
+                <p>Manage your website efficiently with customized admin panels and tools.</p>
+            </div>
+            <div class="card">
+                <h3>Photo Galleries</h3>
+                <p>Interactive and responsive galleries for portfolios, products, or events.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="portfolio">
+        <h2>Our Portfolio</h2>
+        <div class="portfolio-grid">
+            <!-- Project 1 -->
+            <div class="portfolio-item" onclick="openModal(0)">
+                <img src="Images/Portfolio/Portfolio 1/Laptop 1.png" alt="Business Website">
+                <div class="overlay"><h3>Business Website</h3></div>
+            </div>
+
+            <!-- Project 2 -->
+            <div class="portfolio-item" onclick="openModal(1)">
+                <img src="Images/Portfolio/Portfolio 2/Laptop.png" alt="E-Commerce Website">
+                <div class="overlay"><h3>E-Commerce Store</h3></div>
+            </div>
+
+            <!-- Project 3 -->
+            <div class="portfolio-item" onclick="openModal(2)">
+                <img src="Images/Portfolio/Portfolio 3/Laptop 1.png" alt="Portfolio Gallery">
+                <div class="overlay"><h3>Portfolio Gallery</h3></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal Popup -->
+    <div id="portfolioModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+
+        <div class="modal-content">
+            <div class="slider">
+                <button class="prev" onclick="changeSlide(-1)">&#10094;</button>
+                <div class="slides-container" id="slidesContainer"></div>
+                <button class="next" onclick="changeSlide(1)">&#10095;</button>
+            </div>
+            <div class="modal-description" id="modalDescription"></div>
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="about-container">
+            <!-- Left: Profile Card -->
+            <div class="about-left">
+                <div class="profile-card">
+                    <img src="Images/Profile/Default.png" alt="Sahib Narula" class="profile-image">
+                    <div class="profile-details">
+                        <h3>Sahib Narula</h3>
+                        <p>Founder of Silent Systems</p><br>
+                        <p>Passionate about building fully customized, high-converting websites for businesses and entrepreneurs.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: About Text -->
+            <div class="about-right">
+                <h2>About Silent Systems</h2>
+                <p>Silent Systems is a tech brand dedicated to creating high-quality, <br> fully customized websites for businesses and entrepreneurs. <br> Our mission is to help brands stand out online with modern designs,<br> interactive features and seamless functionality.</p>
+                <p>We focus on building websites that not only look beautiful but also drive results. <br> From responsive design to e-commerce solutions and admin dashboards,<br> we combine creativity and strategy to deliver a complete digital presence for your business. <br>Every website we build is tailored to meet the unique needs of our clients and their audiences.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <!-- Quick Links -->
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#portfolio">Portfolio</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact Info -->
+            <div class="footer-section">
+                <h4>Contact</h4>
+                <p>Email: <a href="mailto:silentsystems.team@gmail.com">silentsystems.team@gmail.com</a></p>
+                <p>Phone: <a href="tel:+917849866475">+91 78498 66475</a></p>
+            </div>
+            <!-- Legal Links -->
+            <div class="footer-legal">
+                <h4>Legal</h4>
+                <ul>
+                <li><a href="Pages/Legal/T&Cs/terms-and-conditions.html" target="_blank">Terms & Conditions</a></li>
+                <li><a href="Pages/Legal/TOS/terms-of-service.html" target="_blank">Terms of Service</a></li>
+                <li><a href="Pages/Legal/Privacy policy/privacy-policy.html" target="_blank">Privacy Policy</a></li>
+                </ul>
+            </div>
+
+            <!-- Newsletter Signup -->
+            <div class="footer-section">
+                <h4>Newsletter</h4>
+                <p>Subscribe to get updates on our latest projects.</p>
+                <form id="newsletterForm">
+                    <input type="email" placeholder="Your Email" required>
+                    <button type="submit">Subscribe</button>
+                </form>
+            </div>
+
+            <!-- Social Links -->
+            <div class="footer-section">
+                <h4>Follow Us</h4>
+                <div class="social-links">
+                    <a href="https://www.instagram.com/silentsystems?utm_source=ig_web_button_share_sheet&igsh=c3Z4cXl4Nmx2NXEw" target="_blank" aria-label="Instagram">
+                        <img src="Images/Logos/instagram.svg" alt="Instagram Logo" class="social-icon">
+                    </a>
+                    <a href="https://www.facebook.com" target="_blank" aria-label="YouTube">
+                        <img src="Images/Logos/facebook.svg" alt="Facebook Logo" class="social-icon">
+                    </a>
+                    <a href="https://www.x.com/@silent_systems_" target="_blank" aria-label="Twitter">
+                        <img src="Images/Logos/twitter-x.svg" alt="Twitter-X Logo" class="social-icon">
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2025 Silent Systems. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

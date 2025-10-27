@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Visual Stories | Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    /* General Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      background-color: #f4f4f4;
+      color: #222;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Header */
+    header {
+      position: sticky;
+      top: 0;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(10px);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 60px;
+      z-index: 100;
+      color: white;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+
+    header .logo {
+      font-weight: 600;
+      letter-spacing: 1.2px;
+      font-size: 1.1rem;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      margin-left: 25px;
+      transition: color 0.3s ease;
+      font-weight: 400;
+    }
+
+    nav a:hover {
+      color: #00d2ff;
+    }
+
+    /* Hero Section */
+    .hero {
+      position: relative;
+      height: 80vh;
+      overflow: hidden;
+    }
+
+    .hero img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(70%);
+      transform: scale(1.05);
+      transition: transform 6s ease;
+    }
+
+    .hero:hover img {
+      transform: scale(1.1);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0.3), rgba(0,0,0,0.7));
+    }
+
+    .hero-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      text-align: center;
+      z-index: 2;
+    }
+
+    .hero-text h1 {
+      font-size: 3.2em;
+      letter-spacing: 3px;
+      text-shadow: 0 4px 10px rgba(0,0,0,0.4);
+      animation: fadeIn 1.5s ease;
+    }
+
+    .hero-text button {
+      margin-top: 25px;
+      padding: 12px 30px;
+      border: none;
+      background: linear-gradient(45deg, #00d2ff, #3a7bd5);
+      color: white;
+      font-size: 1rem;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .hero-text button:hover {
+      transform: scale(1.07);
+      box-shadow: 0 5px 15px rgba(0, 210, 255, 0.5);
+    }
+
+    /* Gallery Section */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+      padding: 70px 60px;
+      background-color: #fff;
+      justify-items: center;
+    }
+
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      width: 100%;
+      max-width: 400px;
+      aspect-ratio: 1 / 1;
+    }
+
+    .gallery-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.08);
+    }
+
+    .overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 15px;
+      background: linear-gradient(180deg, transparent, rgba(0,0,0,0.8));
+      color: white;
+      font-weight: 500;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.4s ease;
+    }
+
+    .gallery-item:hover .overlay {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      background-color: #111;
+      color: #ccc;
+      padding: 30px 20px;
+      font-size: 0.9rem;
+      letter-spacing: 0.5px;
+    }
+
+    /* DISCLAIMER */
+    .disclaimer{
+      text-align:center;font-size:13px;color:rgba(230,250,240,0.7);margin:28px 0 10px;font-style:italic
+    }
+
+
+    /* Animations */
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translate(-50%, -45%);}
+      to {opacity: 1; transform: translate(-50%, -50%);}
+    }
+
+    /* Responsive Layouts */
+    @media (max-width: 1024px) {
+      .gallery {
+        grid-template-columns: repeat(2, 1fr);
+        padding: 50px 40px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .gallery {
+        grid-template-columns: 1fr;
+        padding: 40px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="logo">ALEX CHEN | PHOTOGRAPHY</div>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">About</a>
+      <a href="#">Services</a>
+      <a href="#">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <img src="https://images.unsplash.com/photo-1491557345352-5929e343eb89?auto=format&fit=crop&w=1350&q=80" alt="City at dusk" />
+    <div class="hero-text">
+      <h1>VISUAL STORIES</h1>
+      <button>Explore Gallery</button>
+    </div>
+  </section>
+
+  <!-- Gallery Section -->
+  <section class="gallery">
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=800&q=80" alt="Urban Skyline" />
+      <div class="overlay">URBAN DAYDREAM</div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=800&q=80" alt="Portrait" />
+      <div class="overlay">PORTRAITURE SERIES</div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80" alt="Nature" />
+      <div class="overlay">NATURE'S ESSENCE</div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1466442929976-97f336a657be?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687" alt="Architecture" />
+      <div class="overlay">STRUCTURAL BEAUTY</div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=800&q=80" alt="Coffee" />
+      <div class="overlay">CAFÉ DIARIES</div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=800&q=80" alt="Landscape" />
+      <div class="overlay">WANDERLUST</div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <!-- DISCLAIMER -->
+    <p class="disclaimer">*Note: The names, images, and products used on this website are for reference and design demonstration purposes only.*</p>
+    <p>© 2025 Alex Chen Photography | All Rights Reserved</p>
+  </footer>
+</body>
+</html>
