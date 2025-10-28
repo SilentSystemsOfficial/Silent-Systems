@@ -12,16 +12,18 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static(__dirname));
 
-// ===== Nodemailer Setup =====
+// ===== RESEND (SMTP) Setup =====
+// You’ll get this key from https://resend.com after signing up
 const transporter = nodemailer.createTransport({
-  service: "gmail",
+  host: "smtp.resend.com",
+  port: 587,
   auth: {
-    user: process.env.EMAIL_USER,        // 🔹 Replace with your Gmail
-    pass: process.env.EMAIL_PASS      // 🔹 Replace with App Password
-  }
+    user: "resend",
+    pass: process.env.RESEND_API_KEY, // add this in Render’s environment variables
+  },
 });
 
-// ===== Handle Contact Form =====
+// ===== Contact Form Handler =====
 app.post("/contact", (req, res) => {
   const { name, email, message } = req.body;
 
@@ -29,7 +31,7 @@ app.post("/contact", (req, res) => {
     return res.status(400).json({ success: false, message: "All fields required." });
   }
 
-  // Optional: still save to JSON locally
+  // Optional: Save messages locally (for local testing only)
   const newEntry = { name, email, message, date: new Date().toISOString() };
   const filePath = path.join(__dirname, "messages.json");
   let messages = [];
@@ -41,10 +43,10 @@ app.post("/contact", (req, res) => {
 
   // ===== Email Notification =====
   const mailOptions = {
-    from: email,
-    to: "sahibnarula106@gmail.com",   // 🔹 Your inbox
-    subject: `New contact from ${name}`,
-    text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`
+    from: "onboarding@resend.dev", 
+    to: "sahibnarula106@gmail.com",
+    subject: `New message from ${name}`,
+    text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
   };
 
   transporter.sendMail(mailOptions, (error, info) => {
@@ -57,7 +59,7 @@ app.post("/contact", (req, res) => {
   });
 });
 
-// Serve main page
+// ===== Serve main page =====
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "index.html"));
 });
