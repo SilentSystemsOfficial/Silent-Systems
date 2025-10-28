@@ -2,7 +2,7 @@ import express from "express";
 import fs from "fs";
 import path from "path";
 import cors from "cors";
-import nodemailer from "nodemailer";
+import { Resend } from "resend";
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -12,26 +12,18 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static(__dirname));
 
-// ===== RESEND (SMTP) Setup =====
-// You’ll get this key from https://resend.com after signing up
-const transporter = nodemailer.createTransport({
-  host: "smtp.resend.com",
-  port: 587,
-  auth: {
-    user: "resend",
-    pass: process.env.RESEND_API_KEY, // add this in Render’s environment variables
-  },
-});
+// ===== RESEND HTTP API SETUP =====
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 // ===== Contact Form Handler =====
-app.post("/contact", (req, res) => {
+app.post("/contact", async (req, res) => {
   const { name, email, message } = req.body;
 
   if (!name || !email || !message) {
     return res.status(400).json({ success: false, message: "All fields required." });
   }
 
-  // Optional: Save messages locally (for local testing only)
+  // Optional: store locally (for local dev)
   const newEntry = { name, email, message, date: new Date().toISOString() };
   const filePath = path.join(__dirname, "messages.json");
   let messages = [];
@@ -41,22 +33,21 @@ app.post("/contact", (req, res) => {
   messages.push(newEntry);
   fs.writeFileSync(filePath, JSON.stringify(messages, null, 2));
 
-  // ===== Email Notification =====
-  const mailOptions = {
-    from: "onboarding@resend.dev", 
-    to: "sahibnarula106@gmail.com",
-    subject: `New message from ${name}`,
-    text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
-  };
+  try {
+    // ===== Send Email via Resend API =====
+    const result = await resend.emails.send({
+      from: "Silent Systems <onboarding@resend.dev>",
+      to: "youremail@gmail.com", // 🔹 your inbox
+      subject: `New message from ${name}`,
+      text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
+    });
 
-  transporter.sendMail(mailOptions, (error, info) => {
-    if (error) {
-      console.error("❌ Email error:", error);
-      return res.status(500).json({ success: false, message: "Failed to send email." });
-    }
-    console.log("📨 Email sent:", info.response);
+    console.log("📨 Email sent successfully:", result);
     res.json({ success: true, message: "Message sent successfully!" });
-  });
+  } catch (error) {
+    console.error("❌ Email error:", error);
+    res.status(500).json({ success: false, message: "Failed to send email." });
+  }
 });
 
 // ===== Serve main page =====
