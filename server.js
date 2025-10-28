@@ -37,7 +37,7 @@ app.post("/contact", async (req, res) => {
     // ===== Send Email via Resend API =====
     const result = await resend.emails.send({
       from: "Silent Systems <onboarding@resend.dev>",
-      to: "youremail@gmail.com", // 🔹 your inbox
+      to: "silentsystems.team@gmail.com", // 🔹 your inbox
       subject: `New message from ${name}`,
       text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
     });
